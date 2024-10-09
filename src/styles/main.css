@@ -13,7 +13,7 @@
     height: 9rem;
     width: 100%;
     color: #ffffff;
-    border-bottom: 0.5rem solid #ffd700;
+    border-bottom: 0.2rem solid #ffd700;
 }
 
 .menu-time h2:nth-child(2), .menu-score h2:nth-child(2){
@@ -27,7 +27,7 @@
     margin-top: 1rem;
 }
 
-.square{
+.squares{
     background-color: #ffd900b2;
     height: 15rem;
     width: 15rem;
