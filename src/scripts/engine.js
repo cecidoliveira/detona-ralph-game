@@ -3,16 +3,25 @@ const state = {
         squares: document.querySelectorAll(".squares"),
         enemy: document.querySelector(".enemy"),
         timeLeft: document.querySelector("#time-left"),
-        score: document.querySelector("#score")
+        score: document.querySelector("#score"),
     },
     values:{
         timerId: null,
         gameVelocity: 1000,
         hitPosition: 0,
         result: 0,
-        countDownTimerId: setInterval(countDown, 1000),
         currentTime: 60,
+    },
+    actions:{
+        countDownTimerId: setInterval(countDown, 1000),
+        timerId: setInterval(randomSquare, 1000),
     }
+}
+
+function playSound(audioName) {
+    let audio = new Audio(`./src/sounds/${audioName}.m4a`);
+    audio.volume = 0.2;
+    audio.play();
 }
 
 function countDown() {
@@ -35,10 +44,6 @@ function randomSquare() {
     state.values.hitPosition = boxRandomSquare.id;
 }
 
-function moveEnemy() {
-    state.values.timerId = setInterval(randomSquare, state.values.gameVelocity);
-}
-
 function addListenerHitBox() {
     state.view.squares.forEach((square) => {
         square.addEventListener("mousedown", () => {
@@ -46,13 +51,13 @@ function addListenerHitBox() {
                 state.values.result++;
                 state.view.score.textContent = state.values.result;
                 state.values.hitPosition = null;
+                playSound("hit")
             }
         });
     });
 }
 
 function init(){
-    moveEnemy();
     addListenerHitBox();
 }
 
